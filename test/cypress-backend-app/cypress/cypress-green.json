@@ -1,0 +1,6 @@
+{
+    "env": {
+        "brandHost": "www.brand.green.io"
+    },
+    "pluginsFile": "cypress/plugins/index.js"
+}

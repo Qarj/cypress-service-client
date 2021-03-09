@@ -1,0 +1,9 @@
+{
+    "env": {
+        "frontendLanguages": "German,French,English",
+        "frenchHost": "www.france.io",
+        "germanHost": "www.german.io",
+        "englishHost": "www.english.io",
+        "brandHost": "www.brand.team2.io"
+    }
+}

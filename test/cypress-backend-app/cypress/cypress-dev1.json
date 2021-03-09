@@ -1,0 +1,12 @@
+{
+    "env": {
+        "brandHost": "www.brand.dev1.io"
+    },
+    "reporter": "mochawesome",
+    "reporterOptions": {
+        "reportDir": "cypress/results/myapp",
+        "overwrite": false,
+        "html": false,
+        "json": true
+    }
+}

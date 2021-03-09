@@ -1,0 +1,6 @@
+{
+    "env": {
+        "brandHost": "www.brand.purple.io"
+    },
+    "ignoreTestFiles": "account.js"
+}

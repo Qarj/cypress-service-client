@@ -1,0 +1,6 @@
+{
+    "env": {
+        "brandHost": "www.brand.fox-team.io"
+    },
+    "integrationFolder": "cypress/integration"
+}

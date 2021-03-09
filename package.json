@@ -1,22 +1,28 @@
 {
-  "name": "cypress-service-client",
-  "version": "0.0.1",
-  "description": "Client for cypress-service",
-  "main": "index.js",
-  "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Qarj/cypress-service-client.git"
-  },
-  "keywords": [
-    "cypress-service"
-  ],
-  "author": "Qarj",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/Qarj/cypress-service-client/issues"
-  },
-  "homepage": "https://github.com/Qarj/cypress-service-client#readme"
+    "name": "cypress-service-client",
+    "version": "0.0.1",
+    "description": "Client for cypress-service",
+    "main": "index.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1",
+        "test1": "node test/testDeploy1.js",
+        "test2": "node test/testDeploy2.js"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://github.com/Qarj/cypress-service-client.git"
+    },
+    "keywords": [
+        "cypress-service"
+    ],
+    "author": "Qarj",
+    "license": "ISC",
+    "bugs": {
+        "url": "https://github.com/Qarj/cypress-service-client/issues"
+    },
+    "homepage": "https://github.com/Qarj/cypress-service-client#readme",
+    "dependencies": {
+        "adm-zip": "^0.5.4",
+        "superagent": "^6.1.0"
+    }
 }

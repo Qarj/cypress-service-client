@@ -1,0 +1,6 @@
+{
+    "env": {
+        "brandHost": "www.brand.live.io"
+    },
+    "supportFile": "cypress/support/index.js"
+}

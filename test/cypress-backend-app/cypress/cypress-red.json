@@ -1,0 +1,6 @@
+{
+    "env": {
+        "brandHost": "www.brand.red.io"
+    },
+    "testFiles": "**/*.*"
+}

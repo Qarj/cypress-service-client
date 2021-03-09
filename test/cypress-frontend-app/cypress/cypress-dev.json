@@ -1,0 +1,15 @@
+{
+    "env": {
+        "frontendLanguages": "German,French,English",
+        "frenchHost": "www.france.io",
+        "germanHost": "www.german.io",
+        "englishHost": "www.english.io",
+        "brandHost": "www.brand.dev.io"
+    },
+    "baseUrl": "http://www.mybaseurl.dev.io",
+    "ignoreTestFiles": "*.ignore-this.js",
+    "blockHosts": "www.block.this.host.io",
+    "userAgent": "this is my useragent string",
+    "viewportHeight": 770,
+    "viewportWidth": 1110
+}

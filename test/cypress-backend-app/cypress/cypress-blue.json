@@ -1,0 +1,6 @@
+{
+    "env": {
+        "brandHost": "www.brand.blue.io"
+    },
+    "fixturesFolder": "cypress/fixtures"
+}

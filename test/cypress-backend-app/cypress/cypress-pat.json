@@ -1,0 +1,6 @@
+{
+    "env": {
+        "brandHost": "www.brand.pat.io"
+    },
+    "downloadsFolder": "cypress/downloads"
+}

@@ -1,0 +1,6 @@
+{
+    "env": {
+        "brandHost": "www.brand.pink.io"
+    },
+    "videosFolder": "cypress/videos"
+}

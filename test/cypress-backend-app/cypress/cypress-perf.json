@@ -1,0 +1,6 @@
+{
+    "env": {
+        "brandHost": "www.brand.perf.io"
+    },
+    "screenshotsFolder": "cypress/screenshots"
+}

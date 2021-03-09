@@ -1,0 +1,9 @@
+{
+    "browser": "electron",
+    "headless": true,
+    "env": {
+        "brandHost": "www.brand.dev2.io",
+        "name": "dev2"
+    },
+    "spec": "cypress/integration/canary/**/*"
+}
