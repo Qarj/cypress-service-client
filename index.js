@@ -38,6 +38,48 @@ async function deployCypressFolder(serviceBaseUrl, environmentName, options = {}
     return result;
 }
 
+async function startSequential(serviceBaseUrl, environmentName, options = {}) {
+    const app = options.app || process.env.npm_package_name;
+    const noVideo = options.noVideo || false;
+    const noVideoParm = noVideo ? '&noVideo=1' : '';
+    const groupName = options.groupName || timeGroup();
+    const noWaitParm = '&noWait=1';
+
+    if (!app) {
+        return { message: 'Cannot determine app name. Supply in options or use `npm run` so package.json is used.' };
+    }
+
+    const getUrl = `${serviceBaseUrl}/tests/${environmentName}/${app}?group=${groupName}${noVideoParm}${noWaitParm}`;
+
+    let result;
+    try {
+        result = await superagent.get(getUrl);
+    } catch (err) {
+        console.log(err);
+        const message = `Tried GET ${getUrl} but failed. Is server up?`;
+        console.log(`${message}`);
+        return { message: message };
+    }
+    return result;
+}
+
+function timeGroup() {
+    const now = new Date();
+    const time = pad(now.getHours()) + '.' + pad(now.getMinutes()) + '.' + pad(now.getSeconds());
+    const ms = now.getMilliseconds();
+    return `${time}.${ms}`;
+}
+
+function pad(str, pad = '00', padLeft = true) {
+    if (typeof str === 'undefined') return pad;
+    if (padLeft) {
+        return (pad + str).slice(-pad.length);
+    } else {
+        return (str + pad).substring(0, pad.length);
+    }
+}
+
 module.exports = {
     deployCypressFolder,
+    startSequential,
 };

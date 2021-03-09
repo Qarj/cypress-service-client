@@ -56,3 +56,60 @@ async function deployCypressTests() {
     console.log(result);
 }
 ```
+
+## startSequential(serviceBaseUrl, environmentName, options)
+
+Starts running all tests for the app and environment to run one by one sequentially without waiting for the result.
+
+_Example 1_
+
+The `name` and `version` will be read from your `package.json`.
+
+```js
+const csc = require('cypress-service-client');
+
+testStartSequential();
+
+async function testStartSequential() {
+    const serviceBaseUrl = 'http://localhost:3950';
+    const environmentName = 'dev';
+
+    const result = await csc.startSequential(serviceBaseUrl, environmentName);
+    console.log(result);
+}
+```
+
+Assuming your app is called `my-react-app`, a GET will be done to http://localhost:3950/tests/dev/my-react-app?group=22.01.35.215&noWait=1
+
+The group name is derived from the current time.
+
+_Example 2_
+
+Supply options to override defaults.
+
+```js
+const csc = require('cypress-service-client');
+
+testStartSequential();
+
+async function testStartSequential() {
+    const serviceBaseUrl = 'http://localhost:3950';
+    const environmentName = 'dev';
+    const app = 'my-react-app';
+
+    options = {
+        app: app,
+        noVideo: true,
+        groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
+    };
+    const result = await csc.startSequential(serviceBaseUrl, environmentName, options);
+
+    console.log(result);
+}
+```
+
+A GET will be done to http://localhost:3950/tests/dev/my-react-app?group=MyGroup_215&noVideo=1&noWait=1
+
+The no video option tells cypress-service not to produce video files.
+
+The group name you supply is a string but must be unique - cypress-service will not allow you to reuse the group name on any given day - for an app and environment combination.

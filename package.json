@@ -1,12 +1,14 @@
 {
     "name": "cypress-service-client",
-    "version": "0.0.1",
+    "version": "0.0.2",
     "description": "Client for cypress-service",
     "main": "index.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
         "test1": "node test/testDeploy1.js",
-        "test2": "node test/testDeploy2.js"
+        "test2": "node test/testDeploy2.js",
+        "test3": "node test/testStartSequential1.js",
+        "test4": "node test/testStartSequential2.js"
     },
     "repository": {
         "type": "git",
