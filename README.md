@@ -10,7 +10,7 @@ Also can trigger the tests to run in serial or parallel.
 npm install cypress-service-client
 ```
 
-## API - deployCypressFolder(serviceBaseUrl, environmentName, options)
+## deployCypressFolder(serviceBaseUrl, environmentName, options)
 
 _Example 1_
 
@@ -29,6 +29,8 @@ async function deployCypressTests() {
     console.log(result);
 }
 ```
+
+Since we are posting to `dev`, cypress-service will expect to find the cypress config file `cypress-dev.json` at `cypress/cypress-dev.json` from project root.
 
 _Example 2_
 
