@@ -9,7 +9,7 @@ async function testDeploy() {
     const version = 'v1.2.4';
 
     options = {
-        cypressPath: './test/cypress-frontend-app/cypress/',
+        cypressPath: './test/cypress-frontend-app/cypress',
         app: app,
         version: version,
     };

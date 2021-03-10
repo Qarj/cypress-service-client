@@ -1,6 +1,6 @@
 {
     "name": "cypress-service-client",
-    "version": "0.0.3",
+    "version": "0.0.4",
     "description": "Client for cypress-service",
     "main": "index.js",
     "scripts": {
@@ -10,7 +10,9 @@
         "test3": "node test/testStartSequential1.js",
         "test4": "node test/testStartSequential2.js",
         "test5": "node test/testRunSequential1.js",
-        "test6": "node test/testRunSequential2.js"
+        "test6": "node test/testRunSequential2.js",
+        "test7": "node test/testStartParallel1.js",
+        "test8": "node test/testStartParallel2.js"
     },
     "repository": {
         "type": "git",
@@ -27,6 +29,7 @@
     "homepage": "https://github.com/Qarj/cypress-service-client#readme",
     "dependencies": {
         "adm-zip": "^0.5.4",
+        "fs-extra": "^9.1.0",
         "superagent": "^6.1.0"
     }
 }

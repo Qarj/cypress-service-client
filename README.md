@@ -16,7 +16,7 @@ _Example 1_
 
 The `name` and `version` will be read from your `package.json`.
 
-Assuming your app name is `my-react-app` then in this example your `cypress/` folder will be zipped up and posted to http://localhost:3950/tests/dev/my-react-app along with the associated `version`.
+Assuming your app name is `my-react-app` then in this example your `cypress` folder will be zipped up and posted to http://localhost:3950/tests/dev/my-react-app along with the associated `version`.
 
 ```js
 const csc = require('cypress-service-client');
@@ -48,7 +48,7 @@ async function deployCypressTests() {
     const version = 'v1.2.4';
 
     options = {
-        cypressPath: './tests/release/cypress/',
+        cypressPath: './tests/release/cypress',
         app: app,
         version: version,
     };
@@ -117,3 +117,56 @@ The group name you supply is a string but must be unique - cypress-service will 
 ## runSequential(serviceBaseUrl, environmentName, options)
 
 `runSequential` is exactly the same as `startSequential` except for one thing - instead of kicking off the tests and returning immediately, `runSequential` waits until the tests have finished running and returns the test result from cypress-service.
+
+## startParallel(serviceBaseUrl, environmentName, options)
+
+Kicks off each Cypress suite of tests (a suite being defined as each folder directly under `cypress/integration`).
+
+Each suite is kicked off without waiting for the test result. The cypress-service response for each kickoff is returned in an array.
+
+By default there will be a pause of 10000 milliseconds between each suite kickoff - this is because Cypress tends to choke a bit when starting a suite until it gets underway.
+
+_Example 1_
+
+Using all defaults.
+
+```js
+const csc = require('cypress-service-client');
+
+testStartParallel();
+
+async function testStartParallel() {
+    const serviceBaseUrl = 'http://localhost:3950';
+    const environmentName = 'dev';
+
+    const result = await csc.startParallel(serviceBaseUrl, environmentName);
+    console.log(result);
+}
+```
+
+_Example 2_
+
+In this example all the defaults are overriden.
+
+```js
+const csc = require('cypress-service-client');
+
+testStartParallel();
+
+async function testStartParallel() {
+    const serviceBaseUrl = 'http://localhost:3950';
+    const environmentName = 'dev';
+    const app = 'my-react-app';
+
+    options = {
+        app: app,
+        noVideo: true,
+        groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
+        pause: 5000,
+        cypressPath: './tests/release/cypress',
+    };
+    const result = await csc.startParallel(serviceBaseUrl, environmentName, options);
+    console.log(result);
+    console.log('All done.');
+}
+```
