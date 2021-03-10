@@ -113,3 +113,7 @@ A GET will be done to http://localhost:3950/tests/dev/my-react-app?group=MyGroup
 The no video option tells cypress-service not to produce video files.
 
 The group name you supply is a string but must be unique - cypress-service will not allow you to reuse the group name on any given day - for an app and environment combination.
+
+## runSequential(serviceBaseUrl, environmentName, options)
+
+`runSequential` is exactly the same as `startSequential` except for one thing - instead of kicking off the tests and returning immediately, `runSequential` waits until the tests have finished running and returns the test result from cypress-service.

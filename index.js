@@ -39,11 +39,20 @@ async function deployCypressFolder(serviceBaseUrl, environmentName, options = {}
 }
 
 async function startSequential(serviceBaseUrl, environmentName, options = {}) {
+    const noWaitParm = '&noWait=1';
+    return _invokeSequential(serviceBaseUrl, environmentName, options, noWaitParm);
+}
+
+async function runSequential(serviceBaseUrl, environmentName, options = {}) {
+    const noWaitParm = '';
+    return _invokeSequential(serviceBaseUrl, environmentName, options, noWaitParm);
+}
+
+async function _invokeSequential(serviceBaseUrl, environmentName, options = {}, noWaitParm) {
     const app = options.app || process.env.npm_package_name;
     const noVideo = options.noVideo || false;
     const noVideoParm = noVideo ? '&noVideo=1' : '';
     const groupName = options.groupName || timeGroup();
-    const noWaitParm = '&noWait=1';
 
     if (!app) {
         return { message: 'Cannot determine app name. Supply in options or use `npm run` so package.json is used.' };
@@ -82,4 +91,5 @@ function pad(str, pad = '00', padLeft = true) {
 module.exports = {
     deployCypressFolder,
     startSequential,
+    runSequential,
 };
