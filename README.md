@@ -124,7 +124,7 @@ Kicks off each Cypress suite of tests (a suite being defined as each folder dire
 
 Each suite is kicked off without waiting for the test result. The cypress-service response for each kickoff is returned in an array.
 
-By default there will be a pause of 10000 milliseconds between each suite kickoff - this is because Cypress tends to choke a bit when starting a suite until it gets underway.
+By default there will be a `startInterval` of 10000 milliseconds between each suite kickoff - this is because Cypress tends to choke a bit when starting a suite until it gets underway.
 
 _Example 1_
 
@@ -162,11 +162,65 @@ async function testStartParallel() {
         app: app,
         noVideo: true,
         groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
-        pause: 5000,
+        startInterval: 5000,
         cypressPath: './tests/release/cypress',
     };
     const result = await csc.startParallel(serviceBaseUrl, environmentName, options);
     console.log(result);
     console.log('All done.');
+}
+```
+
+## runParallel(serviceBaseUrl, environmentName, options)
+
+Kicks off all tests to run in parallel but with a `startInterval` of 10000 milliseconds between each kickoff (Cypress chokes during test startup.)
+
+By default `runParallel` will wait up to 10 minutes for some kind of definitive result before returning. A definitive result is either that all tests have passed, or at least one test has failed or crashed.
+
+_Example 1_
+
+```js
+const csc = require('cypress-service-client');
+
+testRunParallel();
+
+async function testRunParallel() {
+    const serviceBaseUrl = 'http://localhost:3950';
+    const environmentName = 'dev';
+
+    const result = await csc.runParallel(serviceBaseUrl, environmentName, options);
+    console.log(result);
+}
+```
+
+_Example 2_
+
+We can override the default options as shown here.
+
+`resultWaitLoops` is the number of loops while waiting for a result, `resultWaitPause` is the sleep in milliseconds between each loop.
+
+```js
+const csc = require('cypress-service-client');
+
+testRunParallel();
+
+async function testRunParallel() {
+    const csc = require('../index.js');
+
+    const serviceBaseUrl = 'http://localhost:3950';
+    const environmentName = 'dev';
+    const app = 'my-react-app';
+
+    options = {
+        app: app,
+        noVideo: true,
+        groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
+        startInterval: 5000,
+        cypressPath: './tests/release/cypress',
+        resultWaitLoops: 60,
+        resultWaitPause: 10000,
+    };
+    const result = await csc.runParallel(serviceBaseUrl, environmentName, options);
+    console.log(result);
 }
 ```

@@ -1,6 +1,6 @@
-testStartParallel();
+testRunParallel();
 
-async function testStartParallel() {
+async function testRunParallel() {
     const csc = require('../index.js');
 
     const serviceBaseUrl = 'http://localhost:3950';
@@ -13,8 +13,10 @@ async function testStartParallel() {
         groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
         startInterval: 5000,
         cypressPath: './test/cypress-frontend-app/cypress',
+        resultWaitLoops: 60,
+        resultWaitPause: 1000,
     };
-    const result = await csc.startParallel(serviceBaseUrl, environmentName, options);
+    const result = await csc.runParallel(serviceBaseUrl, environmentName, options);
     console.log(result);
     console.log('All done.');
 }

@@ -70,15 +70,35 @@ async function startParallel(serviceBaseUrl, environmentName, options = {}) {
 }
 
 async function runParallel(serviceBaseUrl, environmentName, options = {}) {
-    const noWaitParm = '';
-    return _invokeParallel(serviceBaseUrl, environmentName, options, noWaitParm);
+    const noWaitParm = '&noWait=1';
+    await _invokeParallel(serviceBaseUrl, environmentName, options, noWaitParm);
+
+    const app = options.app || process.env.npm_package_name;
+    const summaryUrl = `${serviceBaseUrl}/tests/${environmentName}/${app}/summary`;
+    const resultWaitLoops = options.resultWaitLoops || 60;
+    const resultWaitPause = options.resultWaitPause || 10000;
+    const urlMessage = ` Summary at ${summaryUrl} `;
+    for (let i = 0; i < resultWaitLoops; i++) {
+        await _sleep(resultWaitPause);
+        status = JSON.stringify(await _getUrl(summaryUrl));
+        if (status.includes('All tests passed')) {
+            return { message: `All tests passed.${urlMessage}` };
+        }
+        if (status.includes('Some tests failed')) {
+            return { message: `Some tests failed.${urlMessage}` };
+        }
+        if (status.includes('There was a crash')) {
+            return { message: `There was a crash preventing a test start.${urlMessage}` };
+        }
+    }
+    return { message: `Tests did not complete within 10 minutes of final test kick off. Check ${summaryUrl} for status.` };
 }
 
 async function _invokeParallel(serviceBaseUrl, environmentName, options = {}, noWaitParm) {
     const app = options.app || process.env.npm_package_name;
     const noVideo = options.noVideo || false;
     const noVideoParm = noVideo ? '&noVideo=1' : '';
-    const pause = options.pause || 10000;
+    const startInterval = options.startInterval || 10000;
     const cypressPath = options.cypressPath || 'cypress';
 
     const groupName = options.groupName || _timeGroup();
@@ -103,7 +123,7 @@ async function _invokeParallel(serviceBaseUrl, environmentName, options = {}, no
             if (fs.statSync(suitePath + '/' + item).isDirectory()) {
                 suitesCount++;
                 if (needPause) {
-                    await _sleep(pause);
+                    await _sleep(startInterval);
                 }
                 const url = `${serviceBaseUrl}/tests/${environmentName}/${app}?suite=${item}&group=${groupName}${noVideoParm}${noWaitParm}`;
                 result.push(await _getUrl(url));
@@ -161,4 +181,5 @@ module.exports = {
     startSequential,
     runSequential,
     startParallel,
+    runParallel,
 };
