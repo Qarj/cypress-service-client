@@ -1,8 +1,10 @@
 # cypress-service-client
 
-Helper to simplify deploying Cypress tests to cypress-service.
+Helper to simplify deploying Cypress tests to `cypress-service`. See https://github.com/Qarj/cypress-service
 
 Also can trigger the tests to run in serial or parallel.
+
+Check https://github.com/Qarj/cypress-frontend-app for a repo that uses this package.
 
 ## Install
 
@@ -16,7 +18,7 @@ _Example 1_
 
 The `name` and `version` will be read from your `package.json`.
 
-Assuming your app name is `my-react-app` then in this example your `cypress` folder will be zipped up and posted to http://localhost:3950/tests/dev/my-react-app along with the associated `version`.
+Assuming your app name is `my-react-app` then in this example your `cypress` folder will be zipped up and posted to http://localhost:4567/tests/dev/my-react-app along with the associated `version`.
 
 ```js
 const csc = require('cypress-service-client');
@@ -24,7 +26,7 @@ const csc = require('cypress-service-client');
 deployCypressTests();
 
 async function deployCypressTests() {
-    const serviceBaseUrl = 'http://localhost:3950';
+    const serviceBaseUrl = 'http://localhost:4567';
     const result = await csc.deployCypressFolder(serviceBaseUrl, 'dev');
     console.log(result);
 }
@@ -42,7 +44,7 @@ const csc = require('cypress-service-client');
 deployCypressTests();
 
 async function deployCypressTests() {
-    const serviceBaseUrl = 'http://localhost:3950';
+    const serviceBaseUrl = 'http://localhost:4567';
     const environmentName = 'prod';
     const app = 'react-app';
     const version = 'v1.2.4';
@@ -71,7 +73,7 @@ const csc = require('cypress-service-client');
 testStartSequential();
 
 async function testStartSequential() {
-    const serviceBaseUrl = 'http://localhost:3950';
+    const serviceBaseUrl = 'http://localhost:4567';
     const environmentName = 'dev';
 
     const result = await csc.startSequential(serviceBaseUrl, environmentName);
@@ -79,7 +81,7 @@ async function testStartSequential() {
 }
 ```
 
-Assuming your app is called `my-react-app`, a GET will be done to http://localhost:3950/tests/dev/my-react-app?group=22.01.35.215&noWait=1
+Assuming your app is called `my-react-app`, a GET will be done to http://localhost:4567/tests/dev/my-react-app?group=22.01.35.215&noWait=1
 
 The group name is derived from the current time.
 
@@ -93,7 +95,7 @@ const csc = require('cypress-service-client');
 testStartSequential();
 
 async function testStartSequential() {
-    const serviceBaseUrl = 'http://localhost:3950';
+    const serviceBaseUrl = 'http://localhost:4567';
     const environmentName = 'dev';
     const app = 'my-react-app';
 
@@ -108,7 +110,7 @@ async function testStartSequential() {
 }
 ```
 
-A GET will be done to http://localhost:3950/tests/dev/my-react-app?group=MyGroup_215&noVideo=1&noWait=1
+A GET will be done to http://localhost:4567/tests/dev/my-react-app?group=MyGroup_215&noVideo=1&noWait=1
 
 The no video option tells cypress-service not to produce video files.
 
@@ -136,7 +138,7 @@ const csc = require('cypress-service-client');
 testStartParallel();
 
 async function testStartParallel() {
-    const serviceBaseUrl = 'http://localhost:3950';
+    const serviceBaseUrl = 'http://localhost:4567';
     const environmentName = 'dev';
 
     const result = await csc.startParallel(serviceBaseUrl, environmentName);
@@ -154,7 +156,7 @@ const csc = require('cypress-service-client');
 testStartParallel();
 
 async function testStartParallel() {
-    const serviceBaseUrl = 'http://localhost:3950';
+    const serviceBaseUrl = 'http://localhost:4567';
     const environmentName = 'dev';
     const app = 'my-react-app';
 
@@ -185,7 +187,7 @@ const csc = require('cypress-service-client');
 testRunParallel();
 
 async function testRunParallel() {
-    const serviceBaseUrl = 'http://localhost:3950';
+    const serviceBaseUrl = 'http://localhost:4567';
     const environmentName = 'dev';
 
     const result = await csc.runParallel(serviceBaseUrl, environmentName, options);
@@ -207,7 +209,7 @@ testRunParallel();
 async function testRunParallel() {
     const csc = require('../index.js');
 
-    const serviceBaseUrl = 'http://localhost:3950';
+    const serviceBaseUrl = 'http://localhost:4567';
     const environmentName = 'dev';
     const app = 'my-react-app';
 

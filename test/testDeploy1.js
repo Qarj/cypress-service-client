@@ -3,7 +3,7 @@ testDeploy();
 async function testDeploy() {
     const csc = require('../index.js');
 
-    const serviceBaseUrl = 'http://localhost:3950';
+    const serviceBaseUrl = 'http://localhost:4567';
     const environmentName = 'dev';
     const app = 'cypress-frontend-app';
     const version = 'v1.2.4';
