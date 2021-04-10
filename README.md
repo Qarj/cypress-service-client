@@ -18,7 +18,7 @@ _Example 1_
 
 The `name` and `version` will be read from your `package.json`.
 
-Assuming your app name is `my-react-app` then in this example your `cypress` folder will be zipped up and posted to http://localhost:4567/tests/dev/my-react-app along with the associated `version`.
+Assuming your app name is `my-react-app` then in this example your `cypress` folder will be zipped up and posted to http://localhost:4567/test/dev/my-react-app along with the associated `version`.
 
 ```js
 const csc = require('cypress-service-client');
@@ -50,7 +50,7 @@ async function deployCypressTests() {
     const version = 'v1.2.4';
 
     options = {
-        cypressPath: './tests/release/cypress',
+        cypressPath: './test/release/cypress',
         app: app,
         version: version,
     };
@@ -81,7 +81,7 @@ async function testStartSequential() {
 }
 ```
 
-Assuming your app is called `my-react-app`, a GET will be done to http://localhost:4567/tests/dev/my-react-app?group=22.01.35.215&noWait=1
+Assuming your app is called `my-react-app`, a GET will be done to http://localhost:4567/test/dev/my-react-app?group=22.01.35.215&noWait=1
 
 The group name is derived from the current time.
 
@@ -110,7 +110,7 @@ async function testStartSequential() {
 }
 ```
 
-A GET will be done to http://localhost:4567/tests/dev/my-react-app?group=MyGroup_215&noVideo=1&noWait=1
+A GET will be done to http://localhost:4567/test/dev/my-react-app?group=MyGroup_215&noVideo=1&noWait=1
 
 The no video option tells cypress-service not to produce video files.
 
@@ -165,7 +165,7 @@ async function testStartParallel() {
         noVideo: true,
         groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
         startInterval: 5000,
-        cypressPath: './tests/release/cypress',
+        cypressPath: './test/release/cypress',
     };
     const result = await csc.startParallel(serviceBaseUrl, environmentName, options);
     console.log(result);
@@ -218,7 +218,7 @@ async function testRunParallel() {
         noVideo: true,
         groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
         startInterval: 5000,
-        cypressPath: './tests/release/cypress',
+        cypressPath: './test/release/cypress',
         resultWaitLoops: 60,
         resultWaitPause: 10000,
     };

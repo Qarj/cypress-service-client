@@ -6,7 +6,7 @@ async function deployCypressFolder(serviceBaseUrl, environmentName, options = {}
     const cypressPath = options.cypressPath ? options.cypressPath : './cypress';
     const app = options.app || process.env.npm_package_name;
     const version = options.version || process.env.npm_package_version;
-    const postUrl = `${serviceBaseUrl}/tests/${environmentName}/${app}`;
+    const postUrl = `${serviceBaseUrl}/test/${environmentName}/${app}`;
 
     if (!app) {
         return { message: 'Cannot determine app name. Supply in options or use `npm run` so package.json is used.' };
@@ -59,7 +59,7 @@ async function _invokeSequential(serviceBaseUrl, environmentName, options = {}, 
         return { message: 'Cannot determine app name. Supply in options or use `npm run` so package.json is used.' };
     }
 
-    const url = `${serviceBaseUrl}/tests/${environmentName}/${app}?group=${groupName}${noVideoParm}${noWaitParm}`;
+    const url = `${serviceBaseUrl}/test/${environmentName}/${app}?group=${groupName}${noVideoParm}${noWaitParm}`;
 
     return await _getUrl(url);
 }
@@ -74,7 +74,7 @@ async function runParallel(serviceBaseUrl, environmentName, options = {}) {
     await _invokeParallel(serviceBaseUrl, environmentName, options, noWaitParm);
 
     const app = options.app || process.env.npm_package_name;
-    const summaryUrl = `${serviceBaseUrl}/tests/${environmentName}/${app}/summary`;
+    const summaryUrl = `${serviceBaseUrl}/test/${environmentName}/${app}/summary`;
     const resultWaitLoops = options.resultWaitLoops || 60;
     const resultWaitPause = options.resultWaitPause || 10000;
     const urlMessage = ` Summary at ${summaryUrl} `;
@@ -125,7 +125,7 @@ async function _invokeParallel(serviceBaseUrl, environmentName, options = {}, no
                 if (needPause) {
                     await _sleep(startInterval);
                 }
-                const url = `${serviceBaseUrl}/tests/${environmentName}/${app}?suite=${item}&group=${groupName}${noVideoParm}${noWaitParm}`;
+                const url = `${serviceBaseUrl}/test/${environmentName}/${app}?suite=${item}&group=${groupName}${noVideoParm}${noWaitParm}`;
                 result.push(await _getUrl(url));
                 needPause = true;
             }

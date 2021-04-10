@@ -1,6 +1,6 @@
 {
     "name": "cypress-service-client",
-    "version": "0.0.6",
+    "version": "1.0.0",
     "description": "Client for cypress-service",
     "main": "index.js",
     "scripts": {
