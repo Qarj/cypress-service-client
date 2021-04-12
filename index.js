@@ -20,9 +20,7 @@ async function deployCypressFolder(serviceBaseUrl, environmentName, options = {}
     try {
         zipper.addLocalFolder(cypressPath);
     } catch (err) {
-        console.log(err);
         const message = `Tried zipping folder ${cypressPath} but failed. Is that the right path?`;
-        console.log(`${message}`);
         return { message: message };
     }
     let zipBuffer = zipper.toBuffer();
@@ -31,9 +29,7 @@ async function deployCypressFolder(serviceBaseUrl, environmentName, options = {}
     try {
         result = await superagent.post(postUrl).field('version', version).attach('uploadFile', zipBuffer, 'uploadFile.zip');
     } catch (err) {
-        console.log(err);
         const message = `Tried posting to ${postUrl} but failed. Is server up?`;
-        console.log(`${message}`);
         return { message: message };
     }
     return result;
@@ -94,6 +90,16 @@ async function runParallel(serviceBaseUrl, environmentName, options = {}) {
     return { message: `Tests did not complete within 10 minutes of final test kick off. Check ${summaryUrl} for status.` };
 }
 
+async function isRunning(serviceBaseUrl, environmentName, options = {}) {
+    const app = options.app || process.env.npm_package_name;
+    const statusUrl = `${serviceBaseUrl}/test/${environmentName}/${app}/status`;
+    status = JSON.stringify(await _getUrl(statusUrl));
+    if (status.includes('Tests are running')) {
+        return true;
+    }
+    return false;
+}
+
 async function _invokeParallel(serviceBaseUrl, environmentName, options = {}, noWaitParm) {
     const app = options.app || process.env.npm_package_name;
     const noVideo = options.noVideo || false;
@@ -145,9 +151,7 @@ async function _getUrl(url) {
     try {
         result = await superagent.get(url);
     } catch (err) {
-        console.log(err);
         const message = `Tried GET ${url} but failed. Is server up?`;
-        console.log(`${message}`);
         return { message: message };
     }
 
@@ -182,4 +186,5 @@ module.exports = {
     runSequential,
     startParallel,
     runParallel,
+    isRunning,
 };

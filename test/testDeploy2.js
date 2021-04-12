@@ -9,7 +9,6 @@ async function testDeploy() {
     options = {
         cypressPath: './test/cypress-backend-app/cypress',
     };
-    await csc.deployCypressFolder(serviceBaseUrl, environmentName, options);
     const result = await csc.deployCypressFolder(serviceBaseUrl, environmentName, options);
     console.log(result);
     console.log('All done.');

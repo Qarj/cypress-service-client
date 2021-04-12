@@ -226,3 +226,30 @@ async function testRunParallel() {
     console.log(result);
 }
 ```
+
+## isRunning(serviceBaseUrl, environmentName, options)
+
+```js
+const csc = require('cypress-service-client');
+
+isRunning();
+
+async function isRunning() {
+    const csc = require('../index.js');
+
+    const serviceBaseUrl = 'http://localhost:4567';
+    const environmentName = 'dev';
+    const app = 'my-react-app';
+
+    const result = await csc.isRunning(serviceBaseUrl, environmentName);
+    console.log(result);
+}
+```
+
+Can override app name with
+
+```js
+options = {
+    app: 'my-react-app',
+};
+```

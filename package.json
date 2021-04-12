@@ -1,6 +1,6 @@
 {
     "name": "cypress-service-client",
-    "version": "1.0.0",
+    "version": "1.1.0",
     "description": "Client for cypress-service",
     "main": "index.js",
     "scripts": {
@@ -14,7 +14,8 @@
         "test7": "node test/testStartParallel1.js",
         "test8": "node test/testStartParallel2.js",
         "test9": "node test/testRunParallel1.js",
-        "test10": "node test/testRunParallel2.js"
+        "test10": "node test/testRunParallel2.js",
+        "test11": "node test/testIsRunning.js"
     },
     "repository": {
         "type": "git",
