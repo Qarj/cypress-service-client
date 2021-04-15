@@ -49,7 +49,9 @@ async function _invokeSequential(serviceBaseUrl, environmentName, options = {}, 
     const app = options.app || process.env.npm_package_name;
     const noVideo = options.noVideo || false;
     const noVideoParm = noVideo ? '&noVideo=1' : '';
-    const groupName = options.groupName || _timeGroup();
+    const tag = options.tag || '';
+    let groupName = options.groupName || _timeGroup();
+    groupName += tag;
 
     if (!app) {
         return { message: 'Cannot determine app name. Supply in options or use `npm run` so package.json is used.' };
@@ -102,12 +104,14 @@ async function isRunning(serviceBaseUrl, environmentName, options = {}) {
 
 async function _invokeParallel(serviceBaseUrl, environmentName, options = {}, noWaitParm) {
     const app = options.app || process.env.npm_package_name;
+    const cypressPath = options.cypressPath || 'cypress';
     const noVideo = options.noVideo || false;
     const noVideoParm = noVideo ? '&noVideo=1' : '';
     const startInterval = options.startInterval || 10000;
-    const cypressPath = options.cypressPath || 'cypress';
+    const tag = options.tag || '';
 
-    const groupName = options.groupName || _timeGroup();
+    let groupName = options.groupName || _timeGroup();
+    groupName += tag;
 
     if (!app) {
         return { message: 'Cannot determine app name. Supply in options or use `npm run` so package.json is used.' };

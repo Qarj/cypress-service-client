@@ -7,6 +7,7 @@ async function testRunParallel() {
     const environmentName = 'dev';
     options = {
         cypressPath: './test/cypress-backend-app/cypress',
+        tag: 'deploy',
     };
 
     const result = await csc.runParallel(serviceBaseUrl, environmentName, options);

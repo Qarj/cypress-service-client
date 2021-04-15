@@ -50,8 +50,8 @@ async function deployCypressTests() {
     const version = 'v1.2.4';
 
     options = {
-        cypressPath: './test/release/cypress',
         app: app,
+        cypressPath: './test/release/cypress',
         version: version,
     };
     const result = await csc.deployCypressFolder(serviceBaseUrl, environmentName, options);
@@ -101,8 +101,9 @@ async function testStartSequential() {
 
     options = {
         app: app,
-        noVideo: true,
         groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
+        noVideo: true,
+        tag: '_deploy',
     };
     const result = await csc.startSequential(serviceBaseUrl, environmentName, options);
 
@@ -115,6 +116,8 @@ A GET will be done to http://localhost:4567/test/dev/my-react-app?group=MyGroup_
 The no video option tells cypress-service not to produce video files.
 
 The group name you supply is a string but must be unique - cypress-service will not allow you to reuse the group name on any given day - for an app and environment combination.
+
+The tag is appended to the groupName - useful when using the default automatically generated group names (based on the current time.)
 
 ## runSequential(serviceBaseUrl, environmentName, options)
 
@@ -162,10 +165,11 @@ async function testStartParallel() {
 
     options = {
         app: app,
-        noVideo: true,
-        groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
-        startInterval: 5000,
         cypressPath: './test/release/cypress',
+        groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
+        noVideo: true,
+        startInterval: 5000,
+        tag: '_deploy',
     };
     const result = await csc.startParallel(serviceBaseUrl, environmentName, options);
     console.log(result);
@@ -215,12 +219,13 @@ async function testRunParallel() {
 
     options = {
         app: app,
-        noVideo: true,
-        groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
-        startInterval: 5000,
         cypressPath: './test/release/cypress',
+        groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
+        noVideo: true,
         resultWaitLoops: 60,
         resultWaitPause: 10000,
+        startInterval: 5000,
+        tag: '_deploy',
     };
     const result = await csc.runParallel(serviceBaseUrl, environmentName, options);
     console.log(result);

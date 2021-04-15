@@ -9,8 +9,8 @@ async function testDeploy() {
     const version = 'v1.2.4';
 
     options = {
-        cypressPath: './test/cypress-frontend-app/cypress',
         app: app,
+        cypressPath: './test/cypress-frontend-app/cypress',
         version: version,
     };
     const result = await csc.deployCypressFolder(serviceBaseUrl, environmentName, options);

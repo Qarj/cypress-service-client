@@ -9,10 +9,11 @@ async function testStartParallel() {
 
     options = {
         app: app,
-        noVideo: true,
-        groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
-        startInterval: 5000,
         cypressPath: './test/cypress-frontend-app/cypress',
+        groupName: 'MyGroup_' + Math.floor(Math.random() * 1000),
+        noVideo: true,
+        startInterval: 5000,
+        tag: '_deploy',
     };
     const result = await csc.startParallel(serviceBaseUrl, environmentName, options);
     console.log(result);
