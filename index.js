@@ -13,8 +13,8 @@ function _pad(str, pad = '00', padLeft = true) {
 
 function _timeGroup() {
     const now = new Date();
-    const time = _pad(now.getHours()) + '.' + _pad(now.getMinutes()) + '.' + _pad(now.getSeconds());
-    const ms = now.getMilliseconds();
+    const time = _pad(now.getUTCHours) + '.' + _pad(now.getUTCMinutes()) + '.' + _pad(now.getUTCSeconds());
+    const ms = now.getUTCMilliseconds();
     return `${time}.${ms}`;
 }
 
